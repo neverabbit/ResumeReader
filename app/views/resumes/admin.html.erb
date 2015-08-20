@@ -1,0 +1,5 @@
+<%= form_tag({controller: "resumes", action: "batch_update"}, method: "get") do %>
+	<%= submit_tag 'update', name: 'update' %>
+<% end %>
+<%= render 'layouts/debug' %>
+

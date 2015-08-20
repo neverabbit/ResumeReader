@@ -1,0 +1,5 @@
+<%= form_for(@resume, html: { multipart: true }) do |f| %>
+	<%= render 'layouts/debug' %>
+	<%= f.file_field :resume_file %>
+	<%= f.submit "上传" %>
+<% end %>

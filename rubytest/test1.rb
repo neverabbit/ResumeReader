@@ -25,8 +25,11 @@ Dir.foreach('.') do |d|
     
     #puts "%04x" % summary.unpack("U*")[0]
     
-    period = summary.match(/\S+工作经验/).to_s.gsub(/\u00a0/, ' ').match(/\S+$/).to_s
+    period = summary.match(/\S+工作经验/).to_s.gsub(/\u00a0/, ' ').match(/\S+$/).to_s.match(/\d+/).to_s
+    # period = period.match(/\d+$/).to_i
     #puts period
+
+    
     
     #puts doc.css(".summary-top").first.content
     city = doc.css(".summary-top").first.content.match(/现居住地\S+/).to_s.gsub(' ','')[5..-1]
@@ -47,6 +50,7 @@ Dir.foreach('.') do |d|
     # puts quality_r
     quality_f = []
     education_f = []
+    experience = []
     quality_r.each do |q|
       q_item = q.css("h3").first.content
       if q_item.include?('专业技能')
@@ -54,20 +58,27 @@ Dir.foreach('.') do |d|
         quality_f = q.css(".resume-preview-dl").first.content.gsub(/\t|\r/,'').split(/\n/).delete_if {|q| q.empty? }
       elsif q_item.include?('教育经历')
         education_f = q.css(".resume-preview-dl").first.content.gsub(/\t|\r/,'').split(/\n/).delete_if {|q| q.empty? }
+      elsif q_item.include?('工作经历')
+        company = []
+        responsibility = []
+        q.css("h2").each do |h2| 
+          company << h2.content.gsub(/\t|\r/,'').split(/\n/).delete_if {|q| q.empty? }
+        end
+        q.css("h5").each do |h5|
+          responsibility << h5.content.gsub(/\t|\r/,'').split(/\n/).delete_if {|q| q.empty? }
+        end
+        experience = [company, responsibility].transpose
+          
       end
 
     end
+    
+    p experience
     txt = File.open("dir/output.txt", "a+")
-    txt.puts(name_f, phone_f, city, period, position_f, quality_f, education_f)
+    txt.puts(name_f, phone_f, city, period, position_f, quality_f, education_f, experience)
     txt.close
     
     # Dir.mkdir("dir")
 
   end
 end
-
-# position_r.each do |p|
-#   p.content.match()
-#   puts p.content
-# end
-#puts position_r

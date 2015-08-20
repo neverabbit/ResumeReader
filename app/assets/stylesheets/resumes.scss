@@ -1,3 +1,19 @@
 // Place all the styles related to the Resumes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.panel-heading {
+	background-color: #CCFFCC !important;
+}
+
+.resume_label {
+	color: #909090;
+}
+
+.panel-heading, .panel-body {
+	padding-top: 5px;
+	padding-bottom: 0;
+}

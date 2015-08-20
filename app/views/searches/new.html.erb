@@ -1,0 +1,13 @@
+<%= %>
+
+<div class="col-md-3 col-md-offset-1">
+	<%= render 'searches/search_field' %>
+</div>
+
+<div class="col-md-7">
+	<%= will_paginate @resumes %>
+	
+	<%= render 'resumes/resumes_list' %>
+	
+	<%= will_paginate @resumes %>
+</div>

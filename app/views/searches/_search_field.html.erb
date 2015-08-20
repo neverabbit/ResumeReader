@@ -1,0 +1,29 @@
+<%= form_for @search do |f| %>
+	<%= f.label :city, "城市" %>
+	<%= f.text_field :city, class: "form-control" %>
+	
+	<%= f.label :quality, "技能" %>
+	<%= f.text_field :quality, class: "form-control"  %>
+	
+	<%= f.label :education, "教育经历" %>
+	<%= f.text_field :education, class: "form-control"  %>
+	
+	<%= f.label :experience, "工作经历" %>
+	<%= f.text_field :experience, class: "form-control"  %>
+	
+	<%= f.label :position, "职位" %>
+	<%= f.text_field :position, class: "form-control"  %>
+	
+	<%= f.label :phone, "电话" %>
+	<%= f.text_field :phone, class: "form-control"  %>
+	
+	<%= f.label :name, "名字" %>
+	<%= f.text_field :name, class: "form-control"  %>
+	
+	<%= f.label "工作年限" %>
+	<%= f.text_field :min_period, class: "form-control" %>
+	<%= f.text_field :max_period, class: "form-control" %>
+	
+	<%= f.submit "搜索", class: "btn btn-primary submit_button" %>
+
+<% end %>

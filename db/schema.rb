@@ -11,19 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804105801) do
+ActiveRecord::Schema.define(version: 20150820110102) do
 
   create_table "resumes", force: :cascade do |t|
+    t.string   "name",         limit: 255
+    t.string   "city",         limit: 255
+    t.string   "phone",        limit: 255
+    t.string   "position",     limit: 255
+    t.text     "quality",      limit: 65535
+    t.text     "education",    limit: 65535
+    t.text     "experience",   limit: 65535
+    t.string   "period",       limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "resume_file",  limit: 255
+    t.text     "comment",      limit: 65535
+    t.datetime "commented_at"
+  end
+
+  add_index "resumes", ["city"], name: "index_resumes_on_city", using: :btree
+  add_index "resumes", ["comment"], name: "index_resumes_on_comment", length: {"comment"=>200}, using: :btree
+  add_index "resumes", ["commented_at"], name: "index_resumes_on_commented_at", using: :btree
+  add_index "resumes", ["education"], name: "index_resumes_on_education", length: {"education"=>200}, using: :btree
+  add_index "resumes", ["experience"], name: "index_resumes_on_experience", length: {"experience"=>200}, using: :btree
+  add_index "resumes", ["name"], name: "index_resumes_on_name", using: :btree
+  add_index "resumes", ["period"], name: "index_resumes_on_period", using: :btree
+  add_index "resumes", ["phone"], name: "index_resumes_on_phone", using: :btree
+  add_index "resumes", ["position"], name: "index_resumes_on_position", using: :btree
+  add_index "resumes", ["quality"], name: "index_resumes_on_quality", length: {"quality"=>200}, using: :btree
+
+  create_table "searches", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "city",       limit: 255
     t.string   "phone",      limit: 255
     t.string   "position",   limit: 255
-    t.text     "quality",    limit: 65535
-    t.text     "education",  limit: 65535
-    t.text     "experience", limit: 65535
+    t.string   "quality",    limit: 255
+    t.string   "education",  limit: 255
+    t.string   "experience", limit: 255
     t.string   "period",     limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "min_period", limit: 4
+    t.integer  "max_period", limit: 4
   end
 
 end

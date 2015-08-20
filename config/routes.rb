@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
+  # get 'searches/new'
+  #
+  # get 'searches/show'
+
   get 'resumes/home'
+  get 'resumes/admin'
+  get 'resumes/batch_update'
+  resources :resumes
+  resources :searches
+  
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
