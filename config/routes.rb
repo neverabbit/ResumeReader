@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # get 'searches/new'
   #
   # get 'searches/show'
+  
+  root 'searches#new'
 
   get 'resumes/home'
   get 'resumes/admin'

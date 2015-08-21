@@ -1,0 +1,7 @@
+<%= form_for @resume, html: { class: "ajax_form", id: "new_comment" }, remote: true do |f| %>
+	<%= f.label :comment, "备注", class: "" %>
+	<%= f.text_area :comment, class: "" %>
+	
+	<%= button_tag "确定", class: "" %>
+	<%= button_tag "取消", class: "" %>
+<% end %>

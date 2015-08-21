@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820110102) do
+ActiveRecord::Schema.define(version: 20150821154829) do
 
   create_table "resumes", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150820110102) do
     t.string   "resume_file",  limit: 255
     t.text     "comment",      limit: 65535
     t.datetime "commented_at"
+    t.string   "source",       limit: 255
   end
 
   add_index "resumes", ["city"], name: "index_resumes_on_city", using: :btree
@@ -39,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150820110102) do
   add_index "resumes", ["phone"], name: "index_resumes_on_phone", using: :btree
   add_index "resumes", ["position"], name: "index_resumes_on_position", using: :btree
   add_index "resumes", ["quality"], name: "index_resumes_on_quality", length: {"quality"=>200}, using: :btree
+  add_index "resumes", ["source"], name: "index_resumes_on_source", using: :btree
 
   create_table "searches", force: :cascade do |t|
     t.string   "name",       limit: 255

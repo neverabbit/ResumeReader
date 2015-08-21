@@ -61,23 +61,18 @@ class ResumesController < ApplicationController
           #redirect_to @resume
         else
           @debug_info = @resume.errors.full_messages     
-          
         end
         # resume_import(f)
       end
-      # if debug_info.nil?
-#         render 'new'
-#       else
-        redirect_to resumes_url
-      # end
-    #     # @debug_info = f.inspect
-    #   end
-    # else
-    #   # @debug_info = "something wrong"
-    # end
-      # @debug_info = params
+      redirect_to resumes_url
     end
-    # redirect_to resumes_path
+  end
+  
+  def destroy
+    resume = Resume.find(params[:id])
+    resume.remove_resume_file!
+    resume.destroy
+    redirect_to new_search_path
   end
     
     

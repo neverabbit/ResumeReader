@@ -72,6 +72,8 @@ Dir.foreach('.') do |d|
       end
 
     end
+  # elsif
+    
     
     p experience
     txt = File.open("dir/output.txt", "a+")
