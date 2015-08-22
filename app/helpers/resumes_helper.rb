@@ -14,6 +14,7 @@ module ResumesHelper
         f = File.open(resume_file_path)
         doc = Nokogiri::HTML(f)
         f.close
+        name = "无法获取"
         name = doc.css(".main-title-fl").first.content.gsub(' ','')
   
         phone = doc.css(".main-title-fr").first.content.gsub(/\D/,'')

@@ -22,6 +22,7 @@ class Search < ActiveRecord::Base
     resumes = resumes.where("name like ?", "%#{name}%") if name.present?
     resumes = resumes.where("period >= ?", min_period) if min_period.present?
     resumes = resumes.where("period <= ?", max_period) if max_period.present?
+    resumes = resumes.where("comment like ?", "%#{comment}%") if comment.present?
     resumes
   end
 

@@ -1,5 +1,27 @@
-<%= form_for(@resume, html: { multipart: true }) do |f| %>
-	<%= render 'layouts/debug' %>
-	<%= f.file_field :resume_file %>
-	<%= f.submit "上传" %>
-<% end %>
+<%= render 'layouts/debug' %>
+<h1>新建简历</h1>
+
+<div class="col-md-2 col-md-offset-1">
+	<h3>自动导入</h3>
+	<%= form_for(@resume, html: { multipart: true }) do |f| %>
+		
+		<%= f.file_field :resume_file, class: "form-control" %>
+		<%= f.label :source, "来源" %>
+		<%= f.select :source, ['智联招聘', '前程无忧', '猎聘网'], class: "form-control" %>(‘前程无忧’和‘猎聘网’待开发)<br>
+		<%= f.label :comment, "备注"%>
+		<%= f.text_area :comment, class: "form-control" %>
+		
+		<%= f.submit "上传", class: "btn btn-primary" %>
+	<% end %>
+</div>
+<div class="col-md-7 col-md-offset-1">
+	<h3>手动新建</h3>
+	<%= form_for(@resume) do |f| %>
+		<%= render 'field', f: f %>
+		
+		<%= f.label :source, "来源" %>
+		<%= f.select :source, ['sumi'], class: "form-control" %><br>
+		
+		<%= f.submit "新建", class: "btn btn-primary" %>
+	<% end %>
+</div>

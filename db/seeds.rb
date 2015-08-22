@@ -7,6 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-Resume.find_each do |r|
-  r.update_attribute(:source, '智联招聘')
-end
+# Resume.find_each do |r|
+#   r.update_attribute(:source, '智联招聘')
+# end

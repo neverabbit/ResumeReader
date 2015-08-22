@@ -1,7 +1,7 @@
-<%= form_for @resume, html: { class: "ajax_form", id: "new_comment" }, remote: true do |f| %>
-	<%= f.label :comment, "备注", class: "" %>
-	<%= f.text_area :comment, class: "" %>
+<%= form_for resume, html: { class: "ajax_form", id: "new_comment" }, remote: true do |f| %>
+	<%= f.label :comment, "备注" %>
+	<%= f.text_area :comment, class: "form-control" %>
 	
-	<%= button_tag "确定", class: "" %>
-	<%= button_tag "取消", class: "" %>
+	<%= button_tag "确定", id: "comment_submit", class: "btn btn-primary" %>
+	<!-- <%= button_tag "取消", id: "comment_cancel", class: "btn btn-primary" %> -->
 <% end %>

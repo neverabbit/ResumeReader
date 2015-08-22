@@ -1,0 +1,12 @@
+<div class="col-md-2 col-md-offset-1">
+	<%= link_to "导出简历", "#" %>(功能待开发)
+</div>
+
+<div class="col-md-7 col-md-offset-1">
+	<%= form_for(@resume) do |f| %>
+		<%= render 'field', f: f %>
+		
+		<%= f.submit "更新", class: "btn btn-primary" %>
+	<% end %>
+</div>
+	

@@ -1,4 +1,4 @@
-		<% @resume = resume %>
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<p><span class="resume_label">姓名：</span><%= link_to resume.name, resume.resume_file.url %><%= link_to "删除简历", resume, method: :delete, data: { confirm: "确定删除" }, class: "btn btn-primary delete_button" %><%= link_to "编辑简历", edit_resume_path(resume), class: "btn btn-primary update_button"  %></p>
@@ -11,7 +11,8 @@
 				<p><span class="resume_label">学历：</span><%= resume.education %></p>
 				<p><span class="resume_label">技能：</span><%= resume.quality %></p>
 				<p><span class="resume_label">工作经历：</span><%= resume.experience %></p>
-				<p><span class="resume_comment">备注：</span><%= resume.comment ||= "无" %> (上次备注时间：<%= resume.commented_at ||= "无" %>)<%= render 'resumes/comment' %></p>
+				<p><span class="resume_comment">备注：</span><span id="show_comment"><%= resume.comment ||= "无" %></span></p> 
+				<p><span class="resume_comment">最近备注时间：</span><span id="comment_time"><%= resume.commented_at ||= "无" %></span><%= link_to "添加备注", "#", id: "comment_button", class: "btn btn-primary" %><%= render 'resumes/comment', resume: resume %></p>
 				
 			</div>
 		<!-- </li> -->

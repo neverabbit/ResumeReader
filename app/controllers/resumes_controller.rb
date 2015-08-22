@@ -18,16 +18,27 @@ class ResumesController < ApplicationController
     # @resume = Resume.new(resume_params)
     # if resume_params.nil?
     @resume = Resume.new(resume_params)
-    if @resume.save
-      @resume.update_attributes(resume_import(@resume.resume_file.current_path))
-      
-
-      #File.open(resume_file)
-      redirect_to @resume
+    # @debug_info = resume_params.inspect
+    unless @resume.comment.blank?
+      @resume.assign_attributes({commented_at: Time.zone.now })
+    end
+    if params[:commit] == "新建"  
+      if @resume.save
+        redirect_to @resume
+      else
+        @debug_info = @resume.errors.full_messages
+        render 'new'
+      end
+    elsif params[:commit] == "上传" and resume_params.include?(:resume_file)
+      @resume.assign_attributes(resume_import(@resume.resume_file.current_path))
+      if @resume.save
+        redirect_to @resume
+      else 
+        @debug_info = @resume.errors.full_messages
+        render 'new'
+      end
     else
       @debug_info = @resume.errors.full_messages
-      
-      
       render 'new'
     end
   end
@@ -36,14 +47,46 @@ class ResumesController < ApplicationController
     @resume = Resume.find(params[:id])
     # @resume.update_attributes(resume_import(@resume.resume_file.current_path))
 #     @debug_info = @resume.errors.full_messages
-    redirect_to @resume.resume_file.url
+    if @resume.resume_file.blank?
+      render 'show'
+  
+    else
+      render 
+      # redirect_to @resume.resume_file.url
+    end
     # @resume = Resume.find(params[:id])
 #     @debug_info = @resume.resume_file.url
   end
   
+  def edit 
+    @resume = Resume.find(params[:id])
+  end
+  
+  def update
+    @resume = Resume.find(params[:id])
+    comment_old = @resume.comment
+    if @resume.update_attributes(resume_params)
+      if comment_old != @resume.comment
+        @resume.set_commented_at
+      end
+      
+      respond_to do |format|
+        format.html { redirect_to @resume }
+        format.js
+      end
+      
+      # redirect_to @resume
+    else
+      respond_to do |format|
+        format.html { render 'edit' }
+        format.js
+      end
+      # render 'edit'
+    end
+  end
+  
   def admin
-    @debug_info = "test"
-    
+    @debug_info = "test" 
   end
   
   def batch_update
@@ -83,7 +126,7 @@ class ResumesController < ApplicationController
       if params[:resume].nil?
         return nil
       else
-        params.require(:resume).permit(:resume_file)
+        params.require(:resume).permit(:resume_file, :name, :phone, :city, :position, :education, :quality, :experience, :period, :source, :comment)
       end
 #params.require(:resume).permit(:resume_file)
     end

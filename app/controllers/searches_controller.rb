@@ -27,7 +27,7 @@ class SearchesController < ApplicationController
   
   private 
   def search_params
-    params.require(:search).permit(:name, :quality, :education, :city, :experience, :phone, :position, :min_period, :max_period)
+    params.require(:search).permit(:name, :quality, :education, :city, :experience, :phone, :position, :min_period, :max_period, :comment, :commented_at)
   end
   
 end

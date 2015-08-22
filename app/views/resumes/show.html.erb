@@ -1,7 +1,13 @@
-<!-- <%= render 'layouts/debug' %>
+<%= render 'layouts/debug' %>
 
-<%= @resume.resume_file.inspect %>
+<!-- <%= @resume.resume_file.inspect %>
 <br>
 <%= @resume.resume_file.current_path %>
-<br>
-<%= resume_import(@resume.resume_file.current_path).inspect %> -->
+<br> -->
+
+<div class="col-md-2 col-md-offset-1">
+	<%= link_to "导出简历", "#" %>(功能待开发)
+</div>
+<div class="col-md-7 col-md-offset-1">
+	<%= render 'resume', resume: @resume %>
+</div>

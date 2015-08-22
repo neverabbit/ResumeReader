@@ -24,6 +24,12 @@
 	<%= f.text_field :min_period, class: "form-control" %>
 	<%= f.text_field :max_period, class: "form-control" %>
 	
+	<%= f.label "备注" %>
+	<%= f.text_field :comment, class: "form-control" %>
+	
+	<%= f.label "备注时间" %>(待开发)
+	<%= f.text_field :commented_at, class: "form-control" %>
+	
 	<%= f.submit "搜索", class: "btn btn-primary submit_button" %>
 
 <% end %>
