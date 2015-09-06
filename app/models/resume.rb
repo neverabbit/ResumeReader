@@ -3,7 +3,7 @@ class Resume < ActiveRecord::Base
   #validates :name, presence: true
   # validates_presence_of :resume_file
   validates :name, presence: true, length: { maximum: 25 }
-  validates :phone, length: { maximum: 25 }
+  validates :phone, length: { maximum: 25 }, uniqueness: true, allow_blank: true
   validates_uniqueness_of :phone, scope: [:name]
   validate :validate_resume_file_is_unique, on: [:create]
   

@@ -90,26 +90,55 @@ class ResumesController < ApplicationController
   end
   
   def batch_update
-    # @debug_info = ""
-    
     resume_files = Dir.glob("#{Rails.root}/public/zhilian/智联投递简历/**/*")
-    # if params[:update] == "update"
     if !resume_files.blank?
       resume_files.each do |f|
-        @resume = Resume.new
-        @resume.resume_file = Rails.root.join(f).open
-        if @resume.save      
-          @resume.update_attributes(resume_import(@resume.resume_file.current_path))
-          #File.open(resume_file)
-          #redirect_to @resume
-        else
-          @debug_info = @resume.errors.full_messages     
+        if File.extname(f) == ".html"
+          @resume = Resume.new
+          @resume.resume_file = Rails.root.join(f).open
+          @resume.assign_attributes(resume_import(@resume.resume_file.current_path))
+          if @resume.save
+            
+          else
+            @debug_info = @resume.errors.full_messages
+          end
         end
-        # resume_import(f)
       end
       redirect_to resumes_url
+      #       if @resume.save
+      #         @resume.update_attributes(resume_import(@resume.resume_file.current_path))
+      #         #File.open(resume_file)
+      #         #redirect_to @resume
+      #       else
+      #         @debug_info = @resume.errors.full_messages
+      #       end
+      #       # resume_import(f)
+      #     end
+      #     redirect_to resumes_url
     end
   end
+  
+  # def batch_update
+  #   # @debug_info = ""
+  #
+  #   resume_files = Dir.glob("#{Rails.root}/public/zhilian/智联投递简历/**/*")
+  #   # if params[:update] == "update"
+  #   if !resume_files.blank?
+  #     resume_files.each do |f|
+  #       @resume = Resume.new
+  #       @resume.resume_file = Rails.root.join(f).open
+  #       if @resume.save
+  #         @resume.update_attributes(resume_import(@resume.resume_file.current_path))
+  #         #File.open(resume_file)
+  #         #redirect_to @resume
+  #       else
+  #         @debug_info = @resume.errors.full_messages
+  #       end
+  #       # resume_import(f)
+  #     end
+  #     redirect_to resumes_url
+  #   end
+  # end
   
   def destroy
     resume = Resume.find(params[:id])
