@@ -2,11 +2,11 @@
 
 <div class="row">
 	<div class="col-md-8">
-		<%= will_paginate %>
+		<%= will_paginate @resumes %>
 		
-		<%= render 'resumes/resumes_list' %>
+		<%= render @resumes %>
 		
-		<%= will_paginate %>
+		<%= will_paginate @resumes %>
 	</div>
 	<div class="col-md-4">
 		<%= render 'searches/search_field' %>

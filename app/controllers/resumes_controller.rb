@@ -30,7 +30,7 @@ class ResumesController < ApplicationController
         render 'new'
       end
     elsif params[:commit] == "上传" and resume_params.include?(:resume_file)
-      @resume.assign_attributes(resume_import(@resume.resume_file.current_path))
+      @resume.assign_attributes(resume_import_zhilian(@resume.resume_file.current_path))
       if @resume.save
         redirect_to @resume
       else 
@@ -45,7 +45,6 @@ class ResumesController < ApplicationController
   
   def show
     @resume = Resume.find(params[:id])
-    # @resume.update_attributes(resume_import(@resume.resume_file.current_path))
 #     @debug_info = @resume.errors.full_messages
     if @resume.resume_file.blank?
       render 'show'
@@ -90,13 +89,13 @@ class ResumesController < ApplicationController
   end
   
   def batch_update
-    resume_files = Dir.glob("#{Rails.root}/public/zhilian/智联投递简历/**/*")
+    resume_files = Dir.glob("#{Rails.root}/public/zhilian/**/*")
     if !resume_files.blank?
       resume_files.each do |f|
         if File.extname(f) == ".html"
           @resume = Resume.new
           @resume.resume_file = Rails.root.join(f).open
-          @resume.assign_attributes(resume_import(@resume.resume_file.current_path))
+          @resume.assign_attributes(resume_import_zhilian(@resume.resume_file.current_path))
           if @resume.save
             
           else
@@ -104,41 +103,11 @@ class ResumesController < ApplicationController
           end
         end
       end
-      redirect_to resumes_url
-      #       if @resume.save
-      #         @resume.update_attributes(resume_import(@resume.resume_file.current_path))
-      #         #File.open(resume_file)
-      #         #redirect_to @resume
-      #       else
-      #         @debug_info = @resume.errors.full_messages
-      #       end
-      #       # resume_import(f)
-      #     end
-      #     redirect_to resumes_url
+      redirect_to new_search_path
     end
   end
   
-  # def batch_update
-  #   # @debug_info = ""
-  #
-  #   resume_files = Dir.glob("#{Rails.root}/public/zhilian/智联投递简历/**/*")
-  #   # if params[:update] == "update"
-  #   if !resume_files.blank?
-  #     resume_files.each do |f|
-  #       @resume = Resume.new
-  #       @resume.resume_file = Rails.root.join(f).open
-  #       if @resume.save
-  #         @resume.update_attributes(resume_import(@resume.resume_file.current_path))
-  #         #File.open(resume_file)
-  #         #redirect_to @resume
-  #       else
-  #         @debug_info = @resume.errors.full_messages
-  #       end
-  #       # resume_import(f)
-  #     end
-  #     redirect_to resumes_url
-  #   end
-  # end
+
   
   def destroy
     resume = Resume.find(params[:id])
