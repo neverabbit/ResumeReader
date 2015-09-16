@@ -1,7 +1,30 @@
-<%= form_for resume, html: { class: "ajax_form", id: "new_comment" }, remote: true do |f| %>
+<%= form_for resume, html: { class: "ajax_form", id: "new_comment_#{ resume.id }" }, remote: true do |f| %>
 	<%= f.label :comment, "备注" %>
 	<%= f.text_area :comment, class: "form-control" %>
 	
-	<%= button_tag "确定", id: "comment_submit", class: "btn btn-primary" %>
-	<!-- <%= button_tag "取消", id: "comment_cancel", class: "btn btn-primary" %> -->
+	<%= button_tag "确定", id: "comment_submit_#{ resume.id }", class: "comment_submit btn btn-primary" %>
+	<%= button_tag "取消", type: 'button', id: "comment_cancel_#{ resume.id }", class: "btn btn-primary" %>
+	
+	<script type="text/javascript">
+	$("#comment_button_<%= resume.id %>").click(function(){
+		$("#comment_button_<%= resume.id %>").hide();
+		$("#show_comment_<%= resume.id %>").hide();
+		$("#comment_time_<%= resume.id %>").hide();
+		$("#new_comment_<%= resume.id %>").show();
+		return false;
+	});
+	$("#comment_submit_<%= resume.id %>").click(function(){
+		$("#comment_button_<%= resume.id %>").show();
+		$("#show_comment_<%= resume.id %>").show();
+		$("#comment_time_<%= resume.id %>").show();
+		$("#new_comment_<%= resume.id %>").hide();	
+	});
+	$("#comment_cancel_<%= resume.id %>").click(function(){
+		$("#comment_button_<%= resume.id %>").show();
+		$("#show_comment_<%= resume.id %>").show();
+		$("#comment_time_<%= resume.id %>").show();
+		$("#new_comment_<%= resume.id %>").hide();	
+	});
+	</script>
+
 <% end %>

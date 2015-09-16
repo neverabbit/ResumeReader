@@ -1,2 +1,2 @@
-$('#comment_time').html("<%= @resume.commented_at %>")
-$('#show_comment').html("<%= escape_javascript(@resume.comment) %>")
+$('#comment_time_<%= @resume.id %>').html("<%= @resume.commented_at %>")
+$('#show_comment_<%= @resume.id %>').html("<%= escape_javascript(@resume.comment) %>")
