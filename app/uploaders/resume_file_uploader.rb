@@ -18,7 +18,7 @@ class ResumeFileUploader < CarrierWave::Uploader::Base
   
   # white list
   def extension_white_list
-    %w(html)
+    %w(html, mht)
   end
   
   # unicode filename

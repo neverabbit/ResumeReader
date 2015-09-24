@@ -17,6 +17,9 @@
 /tmp
 
 # resume 
+/public/uploads
+/public/zhilian
+/public/wuyou
 *.html
 *.htm
 

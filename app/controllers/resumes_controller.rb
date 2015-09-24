@@ -30,7 +30,13 @@ class ResumesController < ApplicationController
         render 'new'
       end
     elsif params[:commit] == "上传" and resume_params.include?(:resume_file)
-      @resume.assign_attributes(resume_import_zhilian(@resume.resume_file.current_path))
+      if resume_params[:source] == "智联招聘"
+        @resume.assign_attributes(resume_import_zhilian(@resume.resume_file.current_path))
+      elsif resume_params[:source] == "前程无忧"
+        @resume.assign_attributes(resume_import_wuyou(@resume.resume_file.current_path))
+      else
+        @resume.assign_attributes(resume_import_liepin(@resume.resume_file.current_path))
+      end
       if @resume.save
         redirect_to @resume
       else 
@@ -89,7 +95,7 @@ class ResumesController < ApplicationController
   end
   
   def batch_update
-    resume_files = Dir.glob("#{Rails.root}/public/zhilian/**/*")
+    resume_files = Dir.glob("#{Rails.root}/public/wuyou/**/*")
     if !resume_files.blank?
       resume_files.each do |f|
         if File.extname(f) == ".html"
@@ -101,7 +107,18 @@ class ResumesController < ApplicationController
           else
             @debug_info = @resume.errors.full_messages
           end
+        elsif File.extname(f) == ".mht"
+          @resume = Resume.new
+          @resume.resume_file = Rails.root.join(f).open
+          @resume.assign_attributes(resume_import_wuyou(@resume.resume_file.current_path))
+          if @resume.save
+            
+          else
+            @debug_info = @resume.errors.full_messages
+          end
+        else 
         end
+        
       end
       redirect_to new_search_path
     end
