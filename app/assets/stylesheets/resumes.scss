@@ -9,8 +9,14 @@
 	background-color: #CCFFCC !important;
 }
 
+.candidate_name {
+	font-size: 16px;
+}
+
 .resume_label {
 	color: #909090;
+	width: 85px;
+	padding: 8px 8px 8px 15px !important;
 }
 
 .panel-heading, .panel-body {
@@ -21,6 +27,8 @@
 .delete_button, .update_button {
 	margin-left: 3px;
 	float: right;
+//	height: 20px;
+	padding: 3px 12px;
 }
 
 .header_button {
@@ -30,6 +38,7 @@
 .comment_button {
 	float: right;
 	margin-bottom: 8px;
+	padding: 3px 12px;
 }
 
 .ajax_form {

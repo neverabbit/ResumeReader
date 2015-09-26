@@ -1,18 +1,50 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<p><span class="resume_label">姓名：</span><%= link_to resume.name, resume.resume_file.url %><%= link_to "删除简历", resume, method: :delete, data: { confirm: "确定删除" }, class: "btn btn-primary delete_button" %><%= link_to "编辑简历", edit_resume_path(resume), class: "btn btn-primary update_button"  %></p>
-				<p><span class="resume_label">电话：</span><%= resume.phone %></p>
+				<p><b><%= link_to resume.name, resume.resume_file.url, class: "candidate_name" %></b><%= link_to "删除简历", resume, method: :delete, data: { confirm: "确定删除" }, class: "btn btn-primary delete_button" %><%= link_to "编辑简历", edit_resume_path(resume), class: "btn btn-primary update_button" %></p>
+				<!-- <p><span class="resume_label">电话：</span><%= resume.phone %></p> -->
 			</div>
-			<div class="panel-body">
-				<p><span class="resume_label">城市：</span><%= resume.city %></p>
-				<p><span class="resume_label">工作年限：</span><%= resume.period ||= nil %><%= "年" if resume.period.present? %></p>	
-				<p><span class="resume_label">当前职位：</span><%= resume.position %></p>
-				<p><span class="resume_label">学历：</span><%= resume.education %></p>
-				<p><span class="resume_label">技能：</span><%= resume.quality %></p>
-				<p><span class="resume_label">工作经历：</span><%= resume.experience %></p>
-				<p><span class="resume_comment">备注：</span><span id="show_comment_<%= resume.id %>" class="show_comment"><%= resume.comment ||= "无" %></span></p> 
-				<p><span class="resume_comment">最近备注时间：</span><span id="comment_time_<%= resume.id %>" class="comment_time"><%= resume.commented_at ||= "无" %></span><%= link_to "添加备注", "#", id: "comment_button_#{resume.id}", class: "comment_button btn btn-primary" %><%= render 'resumes/comment', resume: resume %></p>
+			<table class="table table-bordered table-striped">
+				<tr>
+					<th class="resume_label">电话</th>
+					<td><%= resume.phone %></td>
+				</tr>
+				<tr>
+					<th class="resume_label">城市</th>
+					<td><%= resume.city %></td>
+				</tr>
+				<tr>
+					<th class="resume_label">工作年限</th>
+					<td><%= resume.period ||= nil %><%= "年" if resume.period.present? %></td>
+				</tr>
+				<tr>
+					<th class="resume_label">当前职位</th>
+					<td><%= resume.position %></td>
+				</tr>
+				<tr>
+					<th class="resume_label">学历</th>
+					<td><%= resume.education %></td>
+				</tr>
 				
-			</div>
+				<tr>
+					<th class="resume_label">技能</th>
+					<td><%= resume.quality %></td>
+				</tr>
+				<tr>
+					<th class="resume_label">工作经历</th>
+					<td><%= resume.experience %></td>
+				</tr>
+				<tr>
+					<th class="resume_label">备注</th>
+					<td><span id="show_comment_<%= resume.id %>" class="show_comment"><%= resume.comment ||= "无" %></span></td>
+				</tr>
+			</table>
+				
+
+				
+				<!-- <p><span class="resume_comment">备注：</span><span id="show_comment_<%= resume.id %>" class="show_comment"><%= resume.comment ||= "无" %></span></p>  -->
+			<div class="panel-footer">
+				<p><span class="resume_comment">最近备注时间：</span><span id="comment_time_<%= resume.id %>" class="comment_time"><%= resume.commented_at ||= "无" %></span><%= link_to "添加备注", "#", id: "comment_button_#{resume.id}", class: "comment_button btn btn-primary" %><%= render 'resumes/comment', resume: resume %></p>
+			</div>	
+				
 		</div>
